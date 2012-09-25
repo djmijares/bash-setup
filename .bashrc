@@ -149,23 +149,16 @@ bash_pwd_truncate () {
     echo ${NEW_PWD}
 }
 
-export PS1="\[$Yellow\](\$(fmt_time)) \[$BBlue\]\u\[$BWhite\] at \[$Cyan\]\h \[$BRed\]\$(bash_pwd_truncate) \[$Purple\]\n\$(parse_git_branch)\$(parse_svn_branch) \\$ ${NONE}"
+my_mac_host_name () {
+    case ${HOSTNAME//.local} in
+	*MacBook-Air )
+	    echo "my  air" ;; 
+	* )
+	echo $HOSTNAME ;;
+    esac
+}
 
-### Cygwin dependent stuff
-# TMP and TEMP are defined in the Windows environment.  Leaving
-# them set to the default Windows temporary directory can have
-# unexpected consequences.
-unset TMP
-unset TEMP
-
-# Alternatively, set them to the Cygwin temporary directory
-# or to any other tmp directory of your choice
-# export TMP=/tmp
-# export TEMP=/tmp
-
-# Or use TMPDIR instead
-# export TMPDIR=/tmp
-###
+export PS1="\[$Yellow\](\$(fmt_time)) \[$BBlue\]\u\[$BWhite\] at \[$Cyan\]\$(my_mac_host_name) \[$BRed\]\$(bash_pwd_truncate) \[$Purple\]\n\$(parse_git_branch)\$(parse_svn_branch) \\$ ${NONE}"
 
 # History Options
 # ###############
