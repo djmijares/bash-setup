@@ -158,7 +158,22 @@ my_mac_host_name () {
     esac
 }
 
-export PS1="\[$Yellow\](\$(fmt_time)) \[$BBlue\]\u\[$BWhite\] at \[$Cyan\]\$(my_mac_host_name) \[$BRed\]\$(bash_pwd_truncate) \[$Purple\]\n\$(parse_git_branch)\$(parse_svn_branch) \\$ ${NONE}"
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '± '
+    svn info 2>/dev/null && echo '∫√µ '
+#    echo '○'
+}
+
+git_status() {
+    gitstatus=`git status 2>/dev/null | tail -n1`
+    if [ "$gitstatus" != "nothing to commit (working directory clean)" ]; then
+	echo "!"
+    else
+	echo ""
+    fi
+}
+
+export PS1="\[$Yellow\](\$(fmt_time)) \[$BBlue\]\u\[$BWhite\] at \[$Cyan\]\$(my_mac_host_name)\[$BWhite\] in \[$BRed\]\$(bash_pwd_truncate)\[$BWhite\] on \[$Purple\]\$(parse_git_branch)\$(parse_svn_branch) \n\$(prompt_char)\\$ ${NONE}"
 
 # History Options
 # ###############
