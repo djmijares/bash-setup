@@ -267,6 +267,10 @@ alias gra="gradle"
 alias grat="gradle tasks"
 alias graa="gradle assemble"
 alias grab="gradle build"
+alias grac="gradle clean"
+alias gracb="gradle clean build"
+alias grat="gradle test"
+alias gract="gradle clean test"
 
 # Zenburn colour scheme for linux
 function zenburn {
